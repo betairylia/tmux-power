@@ -78,6 +78,8 @@ G10=#626262 #241
 G11=#6c6c6c #242
 G12=#767676 #243
 
+G19=#bcbcbc #250
+
 FG="$G10"
 BG="$G04"
 
@@ -113,6 +115,10 @@ fi
 if [[ $prefix_highlight_pos == 'L' || $prefix_highlight_pos == 'LR' ]]; then
     LS="$LS#{prefix_highlight}"
 fi
+if "$show_web_reachable"; then
+    LS="$LS #[fg=$TC]NET #[fg=$G19]#{online_status}"
+fi
+LS="$LS #[fg=$TC]MEM #[fg=$G19]#{ram_percentage} #[fg=$TC]CPU #[fg=$G19]#{cpu_percentage} "
 tmux_set status-left "$LS"
 
 # Right side of status bar
@@ -123,13 +129,10 @@ RS="#[fg=$TC,bg=$G06] $time_icon $time_format #[fg=$TC,bg=$G06]$left_arrow_icon#
 if "$show_download_speed"; then
     RS="#[fg=$G05,bg=$BG]$left_arrow_icon#[fg=$TC,bg=$G05] $download_speed_icon #{download_speed} #[fg=$G06,bg=$G05]$left_arrow_icon$RS"
 fi
-if "$show_web_reachable"; then
-    RS=" #{web_reachable_status} $RS"
-fi
 if [[ $prefix_highlight_pos == 'R' || $prefix_highlight_pos == 'LR' ]]; then
     RS="#{prefix_highlight}$RS"
 fi
-RS="M #{ram_icon} C #{cpu_icon} G #{gpu_icon} #{gram_icon} ${gpu_temp_icon} #{gpu} $RS"
+RS="#[fg=$TC]GPU #[fg=$G10]#{@gpu-order} #[fg=$G19]#{gpu} $RS"
 tmux_set status-right "$RS"
 
 # Window status
