@@ -115,9 +115,9 @@ fi
 if [[ $prefix_highlight_pos == 'L' || $prefix_highlight_pos == 'LR' ]]; then
     LS="$LS#{prefix_highlight}"
 fi
-if "$show_web_reachable"; then
-    LS="$LS #[fg=$TC]NET #[fg=$G19]#{online_status}"
-fi
+# if "$show_web_reachable"; then
+#     LS="$LS #[fg=$TC]NET #[fg=$G19]#{online_status}"
+# fi
 LS="$LS #[fg=$TC]MEM #[fg=$G19]#{ram_percentage} #[fg=$TC]CPU #[fg=$G19]#{cpu_percentage} "
 tmux_set status-left "$LS"
 
@@ -127,7 +127,7 @@ tmux_set status-right-fg "G12"
 tmux_set status-right-length 150
 RS="#[fg=$TC,bg=$G06] $time_icon $time_format #[fg=$TC,bg=$G06]$left_arrow_icon#[fg=$G04,bg=$TC] $date_icon $date_format "
 if "$show_download_speed"; then
-    RS="#[fg=$G05,bg=$BG]$left_arrow_icon#[fg=$TC,bg=$G05] $download_speed_icon #{download_speed} #[fg=$G06,bg=$G05]$left_arrow_icon$RS"
+    RS="#[fg=$G05,bg=$BG]$left_arrow_icon#[fg=$TC,bg=$G05] #{online_status} #{download_speed} #[fg=$G06,bg=$G05]$left_arrow_icon$RS"
 fi
 if [[ $prefix_highlight_pos == 'R' || $prefix_highlight_pos == 'LR' ]]; then
     RS="#{prefix_highlight}$RS"
