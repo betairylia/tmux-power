@@ -129,7 +129,7 @@ fi
 if [[ $prefix_highlight_pos == 'R' || $prefix_highlight_pos == 'LR' ]]; then
     RS="#{prefix_highlight}$RS"
 fi
-RS="#{gpu}$RS"
+RS="M #{ram_icon} C #{cpu_icon} G #{gpu_icon} #{gram_icon} ${gpu_temp_icon} #{gpu} $RS"
 tmux_set status-right "$RS"
 
 # Window status
